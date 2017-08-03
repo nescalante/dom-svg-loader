@@ -1,0 +1,34 @@
+{
+  "name": "dom-svg-loader",
+  "version": "0.1.1",
+  "description": "DOM SVG webpack loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint ./*.js"
+  },
+  "keywords": [
+    "dom",
+    "svg",
+    "loader"
+  ],
+  "author": "Nicolas Escalante <nlante@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0"
+  },
+  "dependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nescalante/dom-svg-loader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nescalante/dom-svg-loader/issues"
+  },
+  "homepage": "https://github.com/nescalante/dom-svg-loader#readme"
+}

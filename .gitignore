@@ -1,0 +1,9 @@
+.DS_Store
+.node-version
+
+# Dependency directory
+node_modules
+
+# Logs
+npm-debug.log*
+*.log
