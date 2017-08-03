@@ -7,9 +7,10 @@ const styles = ['position:absolute', 'width:0', 'height:0', 'visibility:hidden']
 function add(filename) {
   const id = path.basename(filename, '.svg');
   const file = fs.readFileSync(filename).toString()
-    .replace(/^<svg/, `<symbol id="${id}"`)
-    .replace('xmlns="http://www.w3.org/2000/svg" ', '', 'g')
-    .replace(/\/svg>$/, '/symbol>');
+    .trim()
+    .replace(/\<svg/, `<symbol id="${id}"`)
+    .replace(' xmlns="http://www.w3.org/2000/svg"', '', 'g')
+    .replace(/\/svg\>/, '/symbol>');
 
   symbols.push(file);
 
