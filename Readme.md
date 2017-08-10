@@ -33,10 +33,10 @@ require('./my-app');
 #### Some random component
 
 ```javascript
-import code from '@mulesoft/anypoint-icons/lib/svg/code.svg';
+import icon from './svg/my-icon.svg';
 
 export default const mySvg = () => {
-  return (<svg><use xlinkHref={`#${code.id}`} /></svg>);
+  return (<svg><use xlinkHref={`#${icon.id}`} /></svg>);
 };
 ```
 
