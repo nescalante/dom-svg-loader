@@ -8,11 +8,13 @@ function add(filename) {
   const id = path.basename(filename, '.svg');
   const file = fs.readFileSync(filename).toString()
     .trim()
-    .replace(/\<svg/, `<symbol id="${id}"`)
+    .replace(/<svg/, `<symbol id="${id}"`)
     .replace(' xmlns="http://www.w3.org/2000/svg"', '', 'g')
-    .replace(/\/svg\>/, '/symbol>');
+    .replace(/\/svg>/, '/symbol>');
 
-  symbols.push(file);
+  if (!symbols.some(symbol => symbol === file)) {
+    symbols.push(file);
+  }
 
   return {
     id,
