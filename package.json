@@ -1,6 +1,6 @@
 {
   "name": "dom-svg-loader",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "DOM SVG webpack loader",
   "main": "index.js",
   "scripts": {
