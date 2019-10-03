@@ -1,4 +1,13 @@
-extends: airbnb-base
+extends: ['eslint-config-airbnb-base', 'plugin:prettier/recommended']
 
 env:
   node: true
+  es6: true
+
+rules:
+  prefer-arrow-callback:
+    - 0
+  no-return-assign: 0
+  no-use-before-define: off
+  prefer-destructuring: 0
+  prefer-object-spread: 0

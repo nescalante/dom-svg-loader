@@ -1,37 +1,73 @@
-const path = require('path');
+const debug = require('debug');
 const fs = require('fs');
+const sum = require('hash-sum');
+const React = require('react');
+const SVGO = require('svgo');
 
+let renderedSymbols = async () => '';
 const symbols = [];
-const styles = ['position:absolute', 'width:0', 'height:0', 'visibility:hidden'];
+const styles = [
+  'position:absolute',
+  'width:0',
+  'height:0',
+  'visibility:hidden'
+];
+const style = styles.join(';');
+const svgo = new SVGO();
+const log = debug('dom-svg-loader:server');
 
 function add(filename) {
-  const id = path.basename(filename, '.svg');
-  const file = fs.readFileSync(filename).toString()
-    .trim()
-    .replace(/<svg/, `<symbol id="${id}"`)
-    .replace(' xmlns="http://www.w3.org/2000/svg"', '', 'g')
-    .replace(/\/svg>/, '/symbol>');
+  const id = sum(filename);
 
-  if (!symbols.some(symbol => symbol === file)) {
-    symbols.push(file);
+  log('Processing file', filename);
+  log('Using hash', id);
+
+  const content = fs.readFileSync(filename).toString();
+
+  if (!symbols.some((symbol) => symbol.id === id)) {
+    const svgContent = svgo.optimize(content, {
+      path: filename
+    });
+    symbols.push({ content: svgContent, id, filename });
+
+    const newContent = symbols.reduce(async (acum, symbol) => {
+      let defs = await acum;
+      const symbolData = (await symbol.content).data;
+
+      defs += `<symbol id="icon-${symbol.id}">`;
+      defs += symbolData;
+      defs += '</symbol>';
+
+      return defs;
+    }, Promise.resolve(''));
+
+    renderedSymbols = () => newContent;
+  } else {
+    log('Ignoring already processed', filename);
+    log('with hash', id);
   }
 
-  return {
-    id,
-  };
+  return () =>
+    React.createElement(
+      'svg',
+      {},
+      React.createElement('use', { xlinkHref: `#icon-${id}` })
+    );
 }
 
-function render() {
+async function render() {
+  const defs = await renderedSymbols();
+
   return [
-    `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="${styles.join(';')}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="${style}">`,
     '<defs>',
-    symbols.join(''),
+    defs,
     '</defs>',
-    '</svg>',
+    '</svg>'
   ].join('');
 }
 
 module.exports = {
   add,
-  render,
+  render
 };
