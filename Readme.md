@@ -17,8 +17,8 @@ loaders: [
   {
     test: /\.svg$/,
     loader: 'dom-svg-loader'
-  },
-]
+  }
+];
 ```
 
 ### Code
@@ -33,10 +33,10 @@ require('./my-app');
 #### Some random component
 
 ```javascript
-import icon from './svg/my-icon.svg';
+import MyIcon from './svg/my-icon.svg';
 
 export default const mySvg = () => {
-  return (<svg><use xlinkHref={`#${icon.id}`} /></svg>);
+  return (<MyIcon />);
 };
 ```
 
@@ -46,9 +46,9 @@ export default const mySvg = () => {
 import sprites from 'dom-svg-loader/sprites';
 import ReactDOM from 'react-dom/server';
 
-const spriteContent = sprites.render();
+export default async function html() {
+  const spriteContent = await sprites.render();
 
-export default function html() {
   `
     <!DOCTYPE html>
     <html>
@@ -57,7 +57,7 @@ export default function html() {
       ${ReactDOM.renderToString(mySvg())}
     </body>
     </html>
-  `
+  `;
 }
 ```
 
