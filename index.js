@@ -9,5 +9,5 @@ module.exports = function loader() {
   log('Processing file', this.resourcePath);
   log('Using hash', id);
 
-  return `const React = require('react'); module.exports = function () { return React.createElement('svg', {}, React.createElement('use', { xlinkHref: '#icon-${id}' })); };`;
+  return `const React = require('react'); module.exports = function () { const element = React.createElement('svg', {}, React.createElement('use', { xlinkHref: '#icon-${id}' })); element.id = 'icon-${id}'; return element; };`;
 };
