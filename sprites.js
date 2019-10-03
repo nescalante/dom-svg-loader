@@ -47,17 +47,16 @@ function add(filename) {
     log('with hash', id);
   }
 
-  return () => {
-    const element = React.createElement(
+  const result = () =>
+    React.createElement(
       'svg',
       {},
       React.createElement('use', { xlinkHref: `#icon-${id}` })
     );
 
-    element.id = `icon-${id}`;
+  result.id = `icon-${id}`;
 
-    return element;
-  };
+  return result;
 }
 
 async function render() {
