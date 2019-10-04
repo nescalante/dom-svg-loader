@@ -6,7 +6,7 @@ const log = debug('dom-svg-loader:loader');
 
 module.exports = function loader() {
   const basename = path.basename(this.resourcePath, '.svg');
-  const id = sum(this.resourcePath);
+  const id = sum(path.relative(process.cwd(), this.resourcePath));
 
   log('Processing file', this.resourcePath);
   log('Using hash', id);

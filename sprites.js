@@ -18,7 +18,7 @@ const svgo = new SVGO();
 const log = debug('dom-svg-loader:server');
 
 function add(filename) {
-  const id = sum(filename);
+  const id = sum(path.relative(process.cwd(), filename));
   const basename = path.basename(filename, '.svg');
 
   log('Processing file', filename);
