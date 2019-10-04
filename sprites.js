@@ -52,14 +52,8 @@ function add(filename) {
   const result = (props) =>
     React.createElement(
       'svg',
-      Object.assign(
-        {
-          dangerouslySetInnerHTML: {
-            __html: `<use xlink:href="#${basename}-${id}" />`
-          }
-        },
-        props || {}
-      )
+      props || {},
+      React.createElement('use', { xlinkHref: `#${basename}-${id}` })
     );
 
   result.id = `${basename}-${id}`;
