@@ -49,12 +49,8 @@ function add(filename) {
     log('with hash', id);
   }
 
-  const result = (props) =>
-    React.createElement(
-      'svg',
-      props || {},
-      React.createElement('use', { xlinkHref: `#${basename}-${id}` })
-    );
+  const result = () =>
+    React.createElement('use', { xlinkHref: `#${basename}-${id}` });
 
   result.id = `${basename}-${id}`;
 
