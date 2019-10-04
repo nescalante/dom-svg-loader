@@ -6,7 +6,9 @@
   "scripts": {
     "format": "prettier --write '*.js'",
     "lint": "eslint ./*.js",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "keywords": [
     "dom",
