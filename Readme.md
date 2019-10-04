@@ -10,6 +10,8 @@ npm install dom-svg-loader
 
 ## Usage
 
+`dom-svg-loader` will inject svgs required in the dom as "symbols", and then will use a reference to those icons from the required elements
+
 ### Webpack
 
 ```javascript
@@ -37,8 +39,14 @@ import React from 'react';
 import MyIcon from './svg/my-icon.svg';
 
 export default const mySvg = () => {
-  return (<MyIcon />);
+  return <MyIcon />;
 };
+```
+
+Will output:
+
+```html
+<svg><use xlink:href="#my-icon-abcd1234" /></svg>
 ```
 
 #### The render method
@@ -60,6 +68,26 @@ export default async function html() {
     </html>
   `;
 }
+```
+
+Will output:
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;visibility:hidden">
+    <defs>
+      <symbol id="documentation-medium">
+        <svg>
+          <my svg element>
+        </svg>
+      </symbol>
+    </defs>
+  </svg>
+  <svg><use xlink:href="#my-icon-abcd1234" /></svg>
+</body>
+</html>
 ```
 
 ## License
