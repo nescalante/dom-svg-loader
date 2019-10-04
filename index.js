@@ -11,5 +11,5 @@ module.exports = function loader() {
   log('Processing file', this.resourcePath);
   log('Using hash', id);
 
-  return `var React = require('react'); var result = function () { return React.createElement('use', { xlinkHref: '#${basename}-${id}' }); }; result.id = '${basename}-${id}'; module.exports = result;`;
+  return `var React = require('react'); var result = function (props) { return React.createElement('svg', Object.assign({ dangerouslySetInnerHTML: { __html: '<use xlink:href="#${basename}-${id}" />' } }, props || {})); }; result.id = '${basename}-${id}'; module.exports = result;`;
 };

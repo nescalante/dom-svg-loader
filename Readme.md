@@ -32,12 +32,12 @@ require('./my-app');
 
 #### Some random component
 
-```jsx
+```javascript
 import React from 'react';
-import MyIcon from './my-icon.svg';
+import MyIcon from './svg/my-icon.svg';
 
 export default const mySvg = () => {
-  return (<svg><MyIcon /></svg>);
+  return (<MyIcon />);
 };
 ```
 
