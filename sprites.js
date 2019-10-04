@@ -1,6 +1,7 @@
 const debug = require('debug');
 const fs = require('fs');
 const sum = require('hash-sum');
+const path = require('path');
 const React = require('react');
 const SVGO = require('svgo');
 
@@ -18,6 +19,7 @@ const log = debug('dom-svg-loader:server');
 
 function add(filename) {
   const id = sum(filename);
+  const basename = path.basename(filename, '.svg');
 
   log('Processing file', filename);
   log('Using hash', id);
@@ -28,13 +30,13 @@ function add(filename) {
     const svgContent = svgo.optimize(content, {
       path: filename
     });
-    symbols.push({ content: svgContent, id, filename });
+    symbols.push({ content: svgContent, id, basename, filename });
 
     const newContent = symbols.reduce(async (acum, symbol) => {
       let defs = await acum;
       const symbolData = (await symbol.content).data;
 
-      defs += `<symbol id="icon-${symbol.id}">`;
+      defs += `<symbol id="${symbol.basename}-${symbol.id}">`;
       defs += symbolData;
       defs += '</symbol>';
 
@@ -51,10 +53,10 @@ function add(filename) {
     React.createElement(
       'svg',
       {},
-      React.createElement('use', { xlinkHref: `#icon-${id}` })
+      React.createElement('use', { xlinkHref: `#${basename}-${id}` })
     );
 
-  result.id = `icon-${id}`;
+  result.id = `${basename}-${id}`;
 
   return result;
 }
