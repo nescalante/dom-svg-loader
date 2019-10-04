@@ -49,16 +49,16 @@ function add(filename) {
     log('with hash', id);
   }
 
-  const result = (props) =>
+  const SVGIcon = (props) =>
     React.createElement(
       'svg',
       props || {},
       React.createElement('use', { xlinkHref: `#${basename}-${id}` })
     );
 
-  result.id = `${basename}-${id}`;
+  SVGIcon.id = `${basename}-${id}`;
 
-  return result;
+  return SVGIcon;
 }
 
 async function render() {
