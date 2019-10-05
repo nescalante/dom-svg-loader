@@ -37,6 +37,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "hash-sum": "^2.0.0",
+    "humps": "^2.0.1",
     "svgo": "^1.3.0"
   },
   "peerDependencies": {
