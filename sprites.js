@@ -15,7 +15,13 @@ const styles = [
   'visibility:hidden'
 ];
 const style = styles.join(';');
-const svgo = new SVGO();
+const svgo = new SVGO({
+  plugins: [
+    {
+      removeXMLNS: true
+    }
+  ]
+});
 const log = debug('dom-svg-loader:server');
 
 function add(filename) {
