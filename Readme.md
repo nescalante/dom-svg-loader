@@ -1,6 +1,6 @@
 # DOM SVG Loader
 
-Do `require('.svg')` in Node and the browser
+DOM SVG Loader is a library inteded for web applications that runs both in a Node server and in the client (A.K.A. Isomorphic or Universal web apps). It provides a hook to handle `.svg` files in the node server, and then a webpack loader to handle them in the client. It provides a function to render the `svg`s under a `<defs>` tag, so `svg`s appears once in the final HTML and then portions of your application requiring them will just use the `use` tag and will point to the required `svg`.
 
 ## Install
 
