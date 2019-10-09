@@ -31,9 +31,8 @@ function add(filename) {
   log('Processing file', filename);
   log('Using hash', id);
 
-  const content = fs.readFileSync(filename).toString();
-
   if (!symbols.some((symbol) => symbol.id === id)) {
+    const content = fs.readFileSync(filename).toString();
     const svgContent = svgo.optimize(content, {
       path: filename
     });
