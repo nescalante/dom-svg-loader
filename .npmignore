@@ -2,3 +2,4 @@
 .eslintrc.yml
 .prettierrc.yml
 .travis.yml
+test

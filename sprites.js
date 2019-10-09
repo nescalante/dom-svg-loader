@@ -26,7 +26,7 @@ const log = debug('dom-svg-loader:server');
 
 function add(filename) {
   const id = sum(path.relative(process.cwd(), filename));
-  const baseName = path.basename(filename, '.svg');
+  const baseName = path.basename(filename, '.svg').replace(/\./, '');
 
   log('Processing file', filename);
   log('Using hash', id);

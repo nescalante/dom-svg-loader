@@ -6,7 +6,7 @@ const path = require('path');
 const log = debug('dom-svg-loader:loader');
 
 module.exports = function loader() {
-  const baseName = path.basename(this.resourcePath, '.svg');
+  const baseName = path.basename(this.resourcePath, '.svg').replace(/\./, '');
   const displayName = `${humps.pascalize(baseName)}Icon`;
   const id = sum(path.relative(process.cwd(), this.resourcePath));
 
